@@ -69,14 +69,14 @@ public class UnsortedSet<E extends Comparable<E>> extends
 	private int find(Object o) {
 		try {
 			for(int i = 0; i < size; i++) {
-				if(((E)o).compareTo((E)data[i]) > 0) return i;
+				if(((E)o).compareTo((E)data[i]) == 0) return i;
 			}
 		} catch (ClassCastException e) {
 			return -1;
 		}
 		return -1;
 	}
-
+	
 	public static void main(String[] args) {
 		UnsortedSet<Integer> bag = new UnsortedSet<Integer>();
 		bag.add(2);
