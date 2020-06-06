@@ -32,29 +32,22 @@ public class UnsortedBag<E extends Comparable<E>> extends
 
 	@Override
 	public boolean remove(Object o) {
-		if(o == null) throw new NullPointerException();
-		int i = 0;
-		while (i < size && !data[i].equals(o)) {
-			i++;
-		}
-		if(i <= size && data[i].equals(o)) {
-			// Shift all entries one down
-			for(int j = i; j < size; j++) {
-				data[j] = data[i + 1];
+		int pos = Arrays.binarySearch(data, 0, size, o);
+		if(pos < 0)
+		{
+			return false;
+		} else {
+			for(int i = pos; i < size - 1; i++) {
+				data[i] = data[i+1];
 			}
 			size--;
 			return true;
 		}
-		return false;
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		int i = 0;
-		while (i < size && !data[i].equals(o)) {
-			i++;
-		}
-		return i <= size && data[i].equals(o);
+		return find(o) >= 0;
 	}
 
 	@Override
@@ -65,6 +58,19 @@ public class UnsortedBag<E extends Comparable<E>> extends
 	@Override
 	public int size() {
 		return size;
+	}
+
+	private int find(Object o) {
+		try {
+			for (int i=0; i<size; ++i){
+				if (((E)data[i]).compareTo((E)o) == 0){
+					return i;
+				}
+			}
+		} catch (ClassCastException e) {
+			return -1;
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) {
