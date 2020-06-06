@@ -34,8 +34,10 @@ public class SortedSet<E extends Comparable<E>> extends MyAbstractCollection<E>
 				pos = -(pos + 1);
 			}
 			for(int i = size; i > pos; i--) {
+				// Shift all elements one up
 				data[i] = data[i-1];
 			}
+			// Insert at blank position
 			data[pos] = e;
 			size++;
 			return true;
