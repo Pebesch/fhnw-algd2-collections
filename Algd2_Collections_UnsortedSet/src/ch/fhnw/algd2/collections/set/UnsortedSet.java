@@ -76,7 +76,7 @@ public class UnsortedSet<E extends Comparable<E>> extends
 		}
 		return -1;
 	}
-	
+
 	public static void main(String[] args) {
 		UnsortedSet<Integer> bag = new UnsortedSet<Integer>();
 		bag.add(2);
