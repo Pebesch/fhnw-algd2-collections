@@ -27,18 +27,18 @@ public class SortedSet<E extends Comparable<E>> extends MyAbstractCollection<E>
 	public boolean add(E e) {
 		if(size == capacity) throw new IllegalStateException();
 		if(e == null) throw new	NullPointerException();
-		if(contains(e)) {
-			return false;
-		} else {
 			int pos = Arrays.binarySearch(data, 0, size, e);
-			if(pos < 0) pos = -(pos + 1);
+			if(pos >= 0) {
+				return false;
+			} else {
+				pos = -(pos + 1);
+			}
 			for(int i = size; i > pos; i--) {
 				data[i] = data[i-1];
 			}
 			data[pos] = e;
 			size++;
 			return true;
-		}
 	}
 
 	@Override
