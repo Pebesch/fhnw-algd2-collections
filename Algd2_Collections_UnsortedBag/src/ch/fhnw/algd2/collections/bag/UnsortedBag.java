@@ -26,12 +26,8 @@ public class UnsortedBag<E extends Comparable<E>> extends
 	public boolean add(E e) {
 		if(e == null) throw new NullPointerException();
 		if(size == capacity) throw new IllegalStateException();
-		if(size < capacity) {
-			data[size] = e;
-			size++;
-			return true;
-		}
-		return false;
+		data[size++] = e;
+		return true;
 	}
 
 	@Override
