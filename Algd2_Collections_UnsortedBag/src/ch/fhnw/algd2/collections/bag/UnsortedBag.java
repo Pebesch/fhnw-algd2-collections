@@ -10,6 +10,7 @@ public class UnsortedBag<E extends Comparable<E>> extends
 	public static final int DEFAULT_CAPACITY = 100;
 	private int capacity;
 	private Object[] data;
+	private int size;
 
 	public UnsortedBag() {
 		this(DEFAULT_CAPACITY);
@@ -18,18 +19,46 @@ public class UnsortedBag<E extends Comparable<E>> extends
 	public UnsortedBag(int capacity) {
 		this.capacity = capacity;
 		data = new Object[capacity];
+		this.size = 0;
 	}
 
 	@Override
 	public boolean add(E e) {
+		if(e == null) throw new NullPointerException();
+		if(size == capacity) throw new IllegalStateException();
+		if(size < capacity) {
+			data[size] = e;
+			size++;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean remove(Object o) {
+		if(o == null) throw new NullPointerException();
+		int i = 0;
+		while (i < size && !data[i].equals(o)) {
+			i++;
+		}
+		if(i <= size && data[i].equals(o)) {
+			// Shift all entries one down
+			for(int j = i; j < size; j++) {
+				data[j] = data[i + 1];
+			}
+			size--;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean contains(Object o) {
+		int i = 0;
+		while (i < size && !data[i].equals(o)) {
+			i++;
+		}
+		return i <= size && data[i].equals(o);
 	}
 
 	@Override
@@ -39,7 +68,7 @@ public class UnsortedBag<E extends Comparable<E>> extends
 
 	@Override
 	public int size() {
-		
+		return size;
 	}
 
 	public static void main(String[] args) {

@@ -9,6 +9,7 @@ public class SortedBag<E extends Comparable<E>> extends MyAbstractCollection<E> 
 	public static final int DEFAULT_CAPACITY = 100;
 	private int capacity;
 	private Object[] data;
+	private int size;
 
 	public SortedBag() {
 		this(DEFAULT_CAPACITY);
